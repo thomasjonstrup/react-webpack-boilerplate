@@ -1,15 +1,16 @@
-const CleanWebpackPlugin	= require('clean-webpack-plugin');
-const HtmlWebPackPlugin		= require('html-webpack-plugin');
-const path					= require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const path = require('path');
 const webpack = require('webpack');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
 	entry: {
-		main: './src/index.js',
+		main: './src/index.js'
 	},
 	output: {
 		filename: '[name].[hash].js',
-		path: path.resolve('./dist'),
+		path: path.resolve('./dist')
 	},
 	/*module: {
 		rules: [
@@ -31,7 +32,7 @@ module.exports = {
 		]
 	},*/
 	plugins: [
-    	// enable HMR globally
+		// enable HMR globally
 		new webpack.HotModuleReplacementPlugin(),
 
 		// do not emit compiled assets that include errors
@@ -43,6 +44,7 @@ module.exports = {
 		new HtmlWebPackPlugin({
 			template: 'index.html'
 		}),
-		new CleanWebpackPlugin(['dist'])
+		new CleanWebpackPlugin(/*['dist']*/)
+		//new FaviconsWebpackPlugin('my-logo.png')
 	]
-}
+};

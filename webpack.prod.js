@@ -8,25 +8,21 @@ module.exports = merge(common, {
 		rules: [
 			{
 				test: /\.js$/,
-				exclude: ['node_modules'],
-				use: [{ loader: 'babel-loader'}],
+				exclude: [/node_modules/],
+				use: [{ loader: 'babel-loader' }]
 			},
 			{
 				test: /\.s(a|c)ss$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					"css-loader", "sass-loader"
-				]
+				use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
 			}
 		]
 	},
 	plugins: [
-
 		new MiniCssExtractPlugin({
 			// Options similar to the same options in webpackOptions.output
 			// both options are optional
-			filename: "[name].css",
-			chunkFilename: "[id].css"
+			filename: '[name].css',
+			chunkFilename: '[id].css'
 		})
 	]
-})
+});

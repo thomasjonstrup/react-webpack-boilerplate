@@ -1,74 +1,166 @@
 @mixin linear-gradient($direction, $color-stops...) {
-	background: nth(nth($color-stops, 1), 1);
-	background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
-	background: linear-gradient($direction, $color-stops);
+  background: nth(nth($color-stops, 1), 1);
+  background: -webkit-linear-gradient(
+    legacy-direction($direction),
+    $color-stops
+  );
+  background: linear-gradient($direction, $color-stops);
 }
 
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-/*END CSS RESET*/
+@import "partials/_reset.scss";
+@import "partials/_buttons.scss";
 
 
-body, html {
-	height: 100%;
+body,
+html {
+  height: 100%;
 }
 
 .test {
-	text-align: center;
+  text-align: center;
 }
 
 body {
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	color: white;
-	@include linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
-	//background: black;
-	//@include linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
-	//@include linear-gradient(hotpink, tomato);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+  //@include linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+  //background: black;
+  @include linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+  //@include linear-gradient(hotpink, tomato);
+}
+
+// GRID:
+/*.grid-container {
+	display: grid;
+	min-height: 100%;
+	//grid-definition-columns: 1fr 1fr 1fr;
+	//grid-definition-rows: 40px 150px 1fr 1fr 1fr 50px;
+	grid-template-rows: auto 1fr auto;
+    grid-template-columns: 100%;
+	grid-template: "navbar navbar navbar"
+								 "header header header"
+								 "sidebar main main"
+								 "sidebar main main"
+								 "aside1 aside2 aside3"
+								 "footer footer footer";
+	}
+
+nav  { grid-area: navbar; height: 100%}
+header  { grid-area: header; height: 100%}
+main    { grid-area: main;   height: 100%}
+#sidebar { grid-area: sidebar;height: 100%}
+#aside-1 { grid-area: aside1; height: 100%}
+#aside-2 { grid-area: aside2; height: 100%}
+#aside-3 { grid-area: aside3; height: 100%}
+#footer  { grid-area: footer; height: 100%}
+footer  { grid-area: footer; height: 100%}
+*/
+
+/* Responsive 2-Column grid layout */
+
+/* Define grid areas */
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  //max-width: 1024px;
+  margin: 0 auto;
+  font: 1em Helvetica, arial, sans-serif;
+}
+
+.wrapper > * {
+  //border: 2px solid #f08c00;
+  background-color: #ffec99;
+  //border-radius: 5px;
+  padding: 10px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.main-head {
+  grid-area: header;
+}
+.content {
+  grid-area: content;
+}
+.main-nav {
+  grid-area: nav;
+}
+.side {
+  grid-area: sidebar;
+}
+.ad {
+  grid-area: ad;
+}
+.main-footer {
+  grid-area: footer;
+  background-color: #0c3040;
+  color: white;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-areas:
+    "header"
+    "nav"
+    "content"
+    "sidebar"
+    "ad"
+    "footer";
+  grid-template-columns: 100%;
+  min-height: 100%;
+}
+@media (min-width: 500px) {
+  .wrapper {
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas:
+      "header  header"
+      "nav     nav"
+      "content content"
+      "footer  footer";
+  }
+  nav ul {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+@media (min-width: 700px) {
+  .wrapper {
+    //grid-template-columns: 1fr 4fr 1fr;
+    grid-template-columns: 0.5fr 4fr 0.5fr;
+    grid-template-areas:
+      "header header  header"
+      ". nav nav"
+      ". content  ."
+      "footer footer  footer";
+  }
+ /* nav ul {
+    flex-direction: column;
+  }*/
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline;
+}
+
+li a {
+  padding: 0 15px;
 }
